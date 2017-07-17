@@ -101,7 +101,7 @@ def chooseRandomMoveFromList(board, movesList):
         return None
 
 
-def getComputerMove(board, computerLetter, playerLetter):
+def getComputerMove(board, computerLetter):
     # 获取到棋盘和电脑的图形，之后电脑决定如何移动
     if computerLetter == 'X':
         playerLetter == 'O'
@@ -122,7 +122,7 @@ def getComputerMove(board, computerLetter, playerLetter):
     for i in range(1, 10):
         copy = getBoardCopy(board)
         if isSpacceFree(copy, i):
-            makeMove(copy, playLetter, i)
+            makeMove(copy, playerLetter, i)
             if isWinner(copy, playerLetter):
                 return i
 
@@ -152,7 +152,7 @@ print('Welcome to Tic Tac Toe!')
 while True:
     # 重置棋盘
     theBoard = [' '] * 10
-    playLetter, computerLetter = inputPlayerLetter()
+    playerLetter, computerLetter = inputPlayerLetter()
     turn = whoGoesFirst()
     print('The ' + turn + ' will go first.')
     gameIsPlaying = True
@@ -162,9 +162,9 @@ while True:
             # 玩家回合
             drawBoard(theBoard)
             move = getPlayerMove(theBoard)
-            makeMove(theBoard, playLetter, move)
+            makeMove(theBoard, playerLetter, move)
 
-            if isWinner(theBoard, playLetter):
+            if isWinner(theBoard, playerLetter):
                 drawBoard(theBoard)
                 print('Hooray! You have won the game!')
                 gameIsPlaying = False
@@ -178,7 +178,7 @@ while True:
 
         else:
 
-            move = getComputerMove(theBoard, computerLetter, playerLetter)
+            move = getComputerMove(theBoard, computerLetter)
             makeMove(theBoard, computerLetter, move)
             if isWinner(theBoard, computerLetter):
                 drawBoard(theBoard)
